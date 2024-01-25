@@ -11,16 +11,24 @@ app.get('/', (req, res) => {
         systeminformation.cpu()
         .then(cpu => {
             data.cpu = cpu.brand + ' ' + cpu.speed + ' GHz';
+        }).catch(error => {
+            data.cpu = 'Unavailable';
         }),
         systeminformation.mem()
         .then(mem => {
             data.mem = Math.round(mem.total / 1024 / 1024 / 1024) + ' GB';
+        }).catch(error => {
+            data.mem = 'Unavailable';
         }),
         systeminformation.graphics(g => {
             data.graphics = g.controllers[0].model;
+        }).catch(error => {
+            data.graphics = 'Unavailable';
         }),
         systeminformation.osInfo(os => {
             data.os = os.distro + ' ' + os.release;
+        }).catch(error => {
+            data.os = 'Unavailable';
         })
     ]).then(() => {
         res.render('index', {data: data});
