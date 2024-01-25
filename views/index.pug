@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title System Web Monitor
+    body
+        h1 System Web Monitor
+        p System Specs
+        table
+            each prop in (Object.keys(data))
+                tr
+                    td= prop
+                    td= data[prop]
