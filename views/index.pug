@@ -4,11 +4,26 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title System Web Monitor
+        link(rel="stylesheet", href="/css/site.css")
     body
-        h1 System Web Monitor
-        p System Specs
-        table
-            each prop in (Object.keys(data))
-                tr
-                    td= prop
-                    td= data[prop]
+        main 
+            h1 System Web Monitor
+            .main-content
+                section
+                    h2 System Information
+                    table#systemspecs
+                        each prop in (Object.keys(data))
+                            tr
+                                td= prop
+                                td= data[prop]
+                section
+                    h2 System Performance
+                    table 
+                        tbody 
+                            tr 
+                                td CPU Usage
+                                td#cpuload 0%
+                            tr
+                                td Memory Usage
+                                td#mem 0%
+        script(src="/js/performance-updater.js")

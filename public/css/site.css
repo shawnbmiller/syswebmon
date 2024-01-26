@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    text-align: left;
+    padding: 8px 24px;
+    border: 1px solid #ddd;
+}
+main {
+    margin: 0 auto;
+    /* 132 characters wide max */
+    max-width: 132ch;
+    padding: 20px;
+}
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+/* on large and medium screens, 2 sections per row in .main-content */
+@media (min-width: 768px) {
+    .main-content > section {
+        width: 48%;
+    }
+}
+
+/* on small screen, 1 section per row in .main-content */
+@media (max-width: 767px) {
+    .main-content > section {
+        width: 100%;
+    }
+}

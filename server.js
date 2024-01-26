@@ -5,6 +5,8 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(express.static('public'));
+app.use('/api', require('./api/routes'));
 app.get('/', (req, res) => {
     let data = {cpu:null, mem:null, graphics:null, os:null};
     Promise.all([
@@ -29,6 +31,12 @@ app.get('/', (req, res) => {
             data.os = os.distro + ' ' + os.release;
         }).catch(error => {
             data.os = 'Unavailable';
+        }),
+        systeminformation.currentLoad(currentLoad => {
+            data.currentLoad = currentLoad.currentLoad.toFixed(2) + '%';
+        }),
+        systeminformation.fullLoad(fullLoad => {
+            data.fullLoad = fullLoad.toFixed(2) + '%';
         })
     ]).then(() => {
         res.render('index', {data: data});
